@@ -13,17 +13,52 @@
                 align-items: center;
             }
 
-            .square {
-                height: 100px;
-                width: 100px;
+            .shape_gen {
                 background-color: dimgrey;
             }
         </style>
     </head>
     <body>
         <div id="app">
-            <div class="square">
-            </div>
+            <input type="number" class="topLeft" v-model="topLeftInput" min="0" max="100" v-on:change="changed">
+            <input type="number" class="topRight" v-model="topRightInput" min="0" max="100" v-on:change="changed">
+            <div class="shape_gen" v-bind:style="shapeGenObj"></div>
+            <input type="number" class="botLeft" v-model="botLeftInput" min="0" max="100" v-on:change="changed">
+            <input type="number" class="botRight" v-model="botRightInput" min="0" max="100" v-on:change="changed">
         </div>
+
+        <!--Adding js scripts-->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    shapeGenObj: {
+                        height: "300px",
+                        width: "300px",
+                        borderTopLeftRadius: "0%",
+                        borderTopRightRadius: "0%",
+                        borderBottomLeftRadius: "0%",
+                        borderBottomRightRadius: "0%"
+                    },
+                    topLeftInput: 0,
+                    topRightInput: 0,
+                    botLeftInput: 0,
+                    botRightInput: 0
+                },
+                methods: {
+                    changed: function() {
+                        this.shapeGenObj = {
+                            height: "300px",
+                            width: "300px",
+                            borderTopLeftRadius: `${this.topLeftInput}%`,
+                            borderTopRightRadius: `${this.topRightInput}%`,
+                            borderBottomLeftRadius: `${this.botLeftInput}%`,
+                            borderBottomRightRadius: `${this.botRightInput}%`
+                        }
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
